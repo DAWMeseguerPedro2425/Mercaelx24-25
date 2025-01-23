@@ -61,6 +61,10 @@ INSTALLED_APPS = [
     # 'allauth',
     # 'allauth.account',
     # 'allauth.socialaccount',
+    #-----UD10-----
+    #Añadir la aplicación de rest_framework y django_filters para el uso de API REST con filtros de Django
+    'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -223,3 +227,7 @@ SITE_ID = 1
 # EMAIL_HOST_USER = 'manuel6969@gmx.es' 
 # EMAIL_HOST_PASSWORD = 'LVIAJKFD5MNMJ4T64DKV'
 # DEFAULT_FROM_EMAIL = 'manuel6969@gmx.es'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+}

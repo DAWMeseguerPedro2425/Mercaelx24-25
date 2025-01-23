@@ -7,6 +7,10 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 WORKDIR /code
 
+# Instala las dependencias del sistema
+RUN apt-get update && apt-get install -y \
+    postgresql-client
+    
 # Copia el archivo de requisitos y actualiza pip
 ADD requirements.txt /code/
 RUN pip install --upgrade pip

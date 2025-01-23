@@ -27,6 +27,30 @@ from usuarios import views as usuarios_views
 #  el nombre comercios_views
 from directorio_comercios import views as comercios_views
 
+#--------UD10.3.a--------
+#Importar las vistas de la aplicación directorio_comercios.api y core.api
+from rest_framework import routers
+from core.api import views as core_api_views
+from directorio_comercios.api import views as comercios_api_views
+
+
+router = routers.DefaultRouter() # DefaultRouter crea automáticamente las rutas para las vistas de la API
+
+#--------UD10.3.a--------
+#Registrar las vistas de la API REST de las aplicaciones core y directorio_comercios
+router.register(r'provincia_list', core_api_views.ProvinciaListViewSet, basename='provincia_list')
+router.register(r'provincia_crud', core_api_views.ProvinciaDetailViewSet, basename='provincia_crud')
+router.register(r'ciudad_list', core_api_views.CiudadListViewSet, basename='ciudad_list')
+router.register(r'ciudad_crud', core_api_views.CiudadDetailViewSet, basename='ciudad_crud')
+router.register(r'distrito_list', core_api_views.DistritoListViewSet, basename='distrito_list')
+router.register(r'distrito_crud', core_api_views.DistritoDetailViewSet, basename='distrito_crud')
+router.register(r'asociacion_list', comercios_api_views.AsociacionListViewSet, basename='asociacion_list')
+router.register(r'asociacion_crud', comercios_api_views.AsociacionDetailViewSet, basename='asociacion_crud')
+router.register(r'categoria_list', comercios_api_views.CategoriaListViewSet, basename='categoria_list')
+router.register(r'categoria_crud', comercios_api_views.CategoriaDetailViewSet, basename='categoria_crud')
+router.register(r'subcategoria_list', comercios_api_views.SubcategoriaListViewSet, basename='subcategoria_list')
+router.register(r'comercio_list', comercios_api_views.ComercioListViewSet, basename='comercio_list')
+router.register(r'comercio_crud', comercios_api_views.ComercioDetailViewSet, basename='comercio_crud')
 urlpatterns = [
     #--------UD6.2.e-UD6.7--------
     #URLs de la aplicacines
@@ -100,6 +124,12 @@ urlpatterns = [
     path('logout/', usuarios_views.CustomLogoutView.as_view(), name='logout'),
 
     #path('accounts/', include('allauth.urls')),
+
+    path('api/', include(router.urls)), # Incluye las rutas de la API REST
+
+    #----UD10.3.d-----
+    #URL de la API REST para capitalizar nombres
+    path('api/capitalize_names/', core_api_views.CapitalizeNamesView.as_view(), name='capitalize_names'),
 ]
 
 #-----UD6.2.e-----

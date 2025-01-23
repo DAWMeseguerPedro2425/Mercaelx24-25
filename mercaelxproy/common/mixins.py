@@ -6,8 +6,11 @@ from django.http import HttpResponseRedirect
 from django.db.models import ProtectedError
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
-
+from rest_framework.mixins import DestroyModelMixin
+from rest_framework.exceptions import ValidationError
+from rest_framework.response import Response
+from rest_framework import status
+from django.db.models.deletion import ProtectedError
 
 
 
@@ -84,3 +87,16 @@ class LoginRequiredMixin:
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
+
+#----UD10.3.b----
+# Mixin para borrar un objeto con dependencias protegidas heredando de DestroyModelMixin de rest_framework
+class ProtectedDeleteMixin(DestroyModelMixin):
+    error_message = "No se puede realizar la operación de borrado porque existen dependencias."
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        try:
+            instance.delete()
+        except ProtectedError:
+            raise ValidationError(self.error_message)
+        return Response(status=status.HTTP_204_NO_CONTENT)

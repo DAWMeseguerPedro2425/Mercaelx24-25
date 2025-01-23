@@ -5,7 +5,11 @@ crispy-bootstrap5==2024.10
 Django==4.2.16
 django-allauth==65.3.0
 django-crispy-forms==2.3
+django-filter==24.3
+djangorestframework==3.15.2
+git-filter-repo==2.47.0
 idna==3.10
+Markdown==3.7
 pillow==11.0.0
 psycopg==3.1.12
 psycopg-binary==3.1.12

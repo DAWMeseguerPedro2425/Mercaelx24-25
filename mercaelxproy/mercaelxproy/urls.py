@@ -49,6 +49,7 @@ router.register(r'asociacion_crud', comercios_api_views.AsociacionDetailViewSet,
 router.register(r'categoria_list', comercios_api_views.CategoriaListViewSet, basename='categoria_list')
 router.register(r'categoria_crud', comercios_api_views.CategoriaDetailViewSet, basename='categoria_crud')
 router.register(r'subcategoria_list', comercios_api_views.SubcategoriaListViewSet, basename='subcategoria_list')
+router.register(r'subcategoria_crud', comercios_api_views.SubcategoriaDetailViewSet, basename='subcategoria_crud')
 router.register(r'comercio_list', comercios_api_views.ComercioListViewSet, basename='comercio_list')
 router.register(r'comercio_crud', comercios_api_views.ComercioDetailViewSet, basename='comercio_crud')
 urlpatterns = [

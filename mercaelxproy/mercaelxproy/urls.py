@@ -126,6 +126,8 @@ urlpatterns = [
 
     #path('accounts/', include('allauth.urls')),
 
+    #----UD10.4----
+    #Incluye las URLs de la API REST
     path('api/', include(router.urls)), # Incluye las rutas de la API REST
 
     #----UD10.3.d-----

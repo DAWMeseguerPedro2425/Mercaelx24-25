@@ -26,7 +26,7 @@ class ProvinciaListViewSet(mixins.ListModelMixin,
     """
     queryset = Provincia.objects.all()
     serializer_class = ProvinciaListSerializer
-    filter_backends = [filters.OrderingFilter, filters.SearchFilter,DjangoFilterBackend] #Filtros de Django
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter, DjangoFilterBackend] #Filtros de Django
     ordering_fields = ['codigo', 'nombre']
     search_fields = ['codigo', 'nombre']
     ordering = ['codigo']

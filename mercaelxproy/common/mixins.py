@@ -90,6 +90,7 @@ class LoginRequiredMixin:
 
 #----UD10.3.b----
 # Mixin para borrar un objeto con dependencias protegidas heredando de DestroyModelMixin de rest_framework
+# mostrando un mensaje amigable y las dependencias protegidas
 class ProtectedDeleteMixin(DestroyModelMixin):
     error_message = "No se puede realizar la operación de borrado porque existen dependencias."
 
@@ -97,6 +98,7 @@ class ProtectedDeleteMixin(DestroyModelMixin):
         instance = self.get_object()
         try:
             instance.delete()
-        except ProtectedError:
-            raise ValidationError(self.error_message)
+        except ProtectedError as e: # Capturamos la excepción de dependencias protegidas
+            dependent_objects = e.protected_objects # Obtenemos los objetos dependientes
+            raise ValidationError(f"{self.error_message} Objeto: {instance}. Dependencias: {dependent_objects}")
         return Response(status=status.HTTP_204_NO_CONTENT)

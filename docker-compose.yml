@@ -23,6 +23,9 @@ services:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
     ports:
       - "5432:5432"
+    #Archivo de variables de entorno
+    env_file:
+      - .env
 
 volumes:
   postgres_data:

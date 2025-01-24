@@ -1,13 +1,14 @@
 import requests
-import os
-#from requests.auth import HTTPBasicAuth
+from decouple import config
 
 
 #----UD10.1.a----
 # Token de autenticación de GitHub
-GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
+# Uso de la librería decouple para cargar el token de autenticación de GitHub desde un archivo .env 
+# y proteger el token de exponerse en el código fuente si se sube a un repositorio público
+TOKEN = config('GITHUB_TOKEN')
 
-if not GITHUB_TOKEN:
+if not TOKEN:
     raise ValueError("El token de GitHub no está definido en la variable de entorno GITHUB_TOKEN")
 
 url = 'https://api.github.com/search/repositories' # endpoint de la API de GitHub
@@ -15,7 +16,7 @@ url = 'https://api.github.com/search/repositories' # endpoint de la API de GitHu
 
 # Cabeceras de la petición
 headers = {
-    'Authorization': f'Bearer {GITHUB_TOKEN}',
+    'Authorization': f'Bearer {TOKEN}',
     'Accept': 'application/vnd.github.v3+json'
 
 }

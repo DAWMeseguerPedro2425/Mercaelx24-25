@@ -38,6 +38,7 @@ router = routers.DefaultRouter() # DefaultRouter crea automáticamente las rutas
 
 #--------UD10.3.a--------
 #Registrar las vistas de la API REST de las aplicaciones core y directorio_comercios
+#Nombres de los detail cambiados a *_crud para evitar conflictos y confusiones con las URLs
 router.register(r'provincia_list', core_api_views.ProvinciaListViewSet, basename='provincia_list')
 router.register(r'provincia_crud', core_api_views.ProvinciaDetailViewSet, basename='provincia_crud')
 router.register(r'ciudad_list', core_api_views.CiudadListViewSet, basename='ciudad_list')
@@ -132,6 +133,7 @@ urlpatterns = [
 
     #----UD10.3.d-----
     #URL de la API REST para capitalizar nombres
+    #Cambio de nombre de calcular_notas a capitalize_names para que sea más descriptivo
     path('api/capitalize_names/', core_api_views.CapitalizeNamesView.as_view(), name='capitalize_names'),
 ]
 

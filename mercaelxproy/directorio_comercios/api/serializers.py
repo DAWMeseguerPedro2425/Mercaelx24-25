@@ -39,13 +39,13 @@ class SubcategoriaDetailSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ComercioListSerializer(serializers.ModelSerializer):
-    nombre_categoria_nombre = serializers.SerializerMethodField()
+    nombre_provincia_nombre = serializers.SerializerMethodField()
 
     class Meta:
         model = Comercio
-        fields = ['id', 'nombre_categoria_nombre']
+        fields = ['id', 'nombre_provincia_nombre']
 
-    def get_nombre_categoria_nombre(self, obj):
+    def get_nombre_provincia_nombre(self, obj):
         return f"{obj.nombre} - {obj.ciudad.nombre}"
 
 class ComercioDetailSerializer(serializers.ModelSerializer):

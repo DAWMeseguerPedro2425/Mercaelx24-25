@@ -135,6 +135,11 @@ urlpatterns = [
     #URL de la API REST para capitalizar nombres
     #Cambio de nombre de calcular_notas a capitalize_names para que sea más descriptivo
     path('api/capitalize_names/', core_api_views.CapitalizeNamesView.as_view(), name='capitalize_names'),
+
+    #----UD11.1.a-----
+    #URLs de djoser
+    path('api/auth/', include('djoser.urls')),
+    path('api/auth/', include('djoser.urls.jwt')),
 ]
 
 #-----UD6.2.e-----

@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from core.signals import PROVINCIA_CAPITALES, CAPITALES
 from common.mixins import ProtectedDeleteMixin
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 #----UD10.3.a-----
 #Vistas de la API REST de la aplicación core
@@ -31,6 +32,9 @@ class ProvinciaListViewSet(mixins.ListModelMixin,
     search_fields = ['codigo', 'nombre']
     ordering = ['codigo']
     pagination_class = None
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
 class ProvinciaDetailViewSet(mixins.CreateModelMixin,
                              mixins.RetrieveModelMixin,
@@ -47,6 +51,9 @@ class ProvinciaDetailViewSet(mixins.CreateModelMixin,
     """
     queryset = Provincia.objects.all()
     serializer_class = ProvinciaDetailSerializer
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser]    
 
     #----UD10.3.c-----
     #Sobreescribir el método create para crear una ciudad con el nombre de la capital de la provincia
@@ -85,6 +92,9 @@ class CiudadListViewSet(mixins.ListModelMixin,
     filterset_fields = ['provincia']
     ordering = ['codigo']
     pagination_class = StandardResultsSetPagination
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser] 
 
 class CiudadDetailViewSet(mixins.CreateModelMixin,
                           mixins.RetrieveModelMixin,
@@ -101,6 +111,9 @@ class CiudadDetailViewSet(mixins.CreateModelMixin,
     
     queryset = Ciudad.objects.all()
     serializer_class = CiudadDetailSerializer
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser] 
 
 class DistritoListViewSet(mixins.ListModelMixin, 
                           viewsets.GenericViewSet):
@@ -123,6 +136,9 @@ class DistritoListViewSet(mixins.ListModelMixin,
     filterset_fields = ['ciudad']
     ordering = ['nombre']
     pagination_class = StandardResultsSetPagination
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser] 
 
 class DistritoDetailViewSet(mixins.CreateModelMixin,
                             mixins.RetrieveModelMixin,
@@ -138,15 +154,24 @@ class DistritoDetailViewSet(mixins.CreateModelMixin,
     """
     queryset = Distrito.objects.all()
     serializer_class = DistritoDetailSerializer
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser] 
 
 
 #----UD10.3.d-----
 #Vista de la API REST para capitalizar los nombres de las ciudades y provincias
 class CapitalizeNamesView(APIView):
+    
     """
     #----UD10.4-----
     Vista de la API REST para capitalizar los nombres de las ciudades y provincias
     """
+
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser] 
+
     def get(self, request, *args, **kwargs):
         for city in Ciudad.objects.all():
             city.nombre = city.nombre.capitalize()

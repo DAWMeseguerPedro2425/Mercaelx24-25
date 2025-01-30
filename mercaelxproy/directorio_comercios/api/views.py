@@ -5,6 +5,7 @@ from .serializers import AsociacionListSerializer, AsociacionDetailSerializer, C
 from django_filters.rest_framework import DjangoFilterBackend
 from core.api.pagination import StandardResultsSetPagination
 from common.mixins import ProtectedDeleteMixin
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
 #----UD10.3.a-----
@@ -29,6 +30,9 @@ class AsociacionListViewSet(viewsets.ModelViewSet):
     filterset_fields = ['ciudad']
     ordering = ['nombre']
     pagination_class = StandardResultsSetPagination
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser] 
 
 class AsociacionDetailViewSet(mixins.CreateModelMixin,
                             mixins.RetrieveModelMixin,
@@ -44,6 +48,9 @@ class AsociacionDetailViewSet(mixins.CreateModelMixin,
     """
     queryset = Asociacion.objects.all()
     serializer_class = AsociacionDetailSerializer
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser] 
 
 class CategoriaListViewSet(viewsets.ModelViewSet):
     """
@@ -63,6 +70,9 @@ class CategoriaListViewSet(viewsets.ModelViewSet):
     search_fields = ['codigo', 'nombre']
     ordering = ['codigo']
     pagination_class = StandardResultsSetPagination
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser] 
 
 class CategoriaDetailViewSet(mixins.CreateModelMixin,
                              mixins.RetrieveModelMixin,
@@ -78,6 +88,9 @@ class CategoriaDetailViewSet(mixins.CreateModelMixin,
     """
     queryset = Categoria.objects.all()
     serializer_class = CategoriaDetailSerializer
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser] 
 
 class SubcategoriaListViewSet(viewsets.ModelViewSet):
     """
@@ -99,6 +112,9 @@ class SubcategoriaListViewSet(viewsets.ModelViewSet):
     filterset_fields = ['categoria']
     ordering = ['codigo']
     pagination_class = StandardResultsSetPagination
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser] 
 
 class SubcategoriaDetailViewSet(mixins.CreateModelMixin,
                                 mixins.RetrieveModelMixin,
@@ -114,6 +130,9 @@ class SubcategoriaDetailViewSet(mixins.CreateModelMixin,
     """
     queryset = Subcategoria.objects.all()
     serializer_class = SubcategoriaDetailSerializer
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser] 
 
 
 class ComercioListViewSet(viewsets.ModelViewSet):
@@ -136,6 +155,9 @@ class ComercioListViewSet(viewsets.ModelViewSet):
     filterset_fields = ['ciudad', 'asociacion']
     ordering = ['nombre']
     pagination_class = StandardResultsSetPagination
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser] 
 
 class ComercioDetailViewSet(mixins.CreateModelMixin,
                             mixins.RetrieveModelMixin,
@@ -151,3 +173,6 @@ class ComercioDetailViewSet(mixins.CreateModelMixin,
     """
     queryset = Comercio.objects.all()
     serializer_class = ComercioDetailSerializer
+    #----UD11.1.b-----
+    #Añadir permisos de autenticación y de administrador
+    permission_classes = [IsAuthenticated, IsAdminUser] 

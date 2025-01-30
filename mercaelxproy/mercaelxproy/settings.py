@@ -65,6 +65,12 @@ INSTALLED_APPS = [
     #Añadir la aplicación de rest_framework y django_filters para el uso de API REST con filtros de Django
     'rest_framework',
     'django_filters',
+
+    #-----UD11.1.a-----
+    #Añadir la aplicación de djoser, rest_framework.authtoken y rest_framework_simplejwt
+    'djoser',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -228,6 +234,22 @@ SITE_ID = 1
 # EMAIL_HOST_PASSWORD = 'LVIAJKFD5MNMJ4T64DKV'
 # DEFAULT_FROM_EMAIL = 'manuel6969@gmx.es'
 
+
+#-----UD11.1.a-----
+#Configuración de djoser, rest_framework.authtoken y rest_framework_simplejwt
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
+
+#-----UD11.1.a-----
+#Configuración de JWT
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+   'Blacklist_AFTER_ROTATION': False,
 }

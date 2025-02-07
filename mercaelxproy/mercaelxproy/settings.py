@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
+from datetime import timedelta
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -250,6 +251,23 @@ REST_FRAMEWORK = {
 #-----UD11.1.a-----
 #Configuración de JWT
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
+   #'AUTH_HEADER_TYPES': ('JWT',),
+      #----UD11.3.a-----
+   #Cambio de la cabecera de autorización
+   "AUTH_HEADER_TYPES": ("Bearer",),
    'Blacklist_AFTER_ROTATION': False,
+
+   #----UD11.3.d-----
+    #Configuración de tiempo de vida del token
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),  
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=2),   
+}
+
+
+#-----UD11.3.b-----
+#Configuración de djoser para que no envié email de activación y cierre sesión al cambiar la contraseña
+DJOSER = {
+    "LOGIN_FIELD": "email",
+    "SEND_ACTIVATION_EMAIL": False, # Desactivar email de activación
+    "LOGOUT_ON_PASSWORD_CHANGE": True, # Cierre sesion 
 }
